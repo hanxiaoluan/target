@@ -1,11 +1,16 @@
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-  />
-</template>
-
 <script lang="ts" setup>
+import {onMounted, ref} from 'vue'
+import {TargetItem} from './type'
+import axios from 'axios'
+import {TARGET_LIST} from '../../constants/api'
+const targetData = ref<TargetItem[]>([])
+const fetchTargetList = async () => {
+  const result = await axios.get(TARGET_LIST)
+  targetData.value = result.data
+}
+onMounted(() => {
+  fetchTargetList()
+})
 import { NDataTable } from 'naive-ui'
 const columns= [
   {
@@ -25,20 +30,12 @@ const columns= [
     key: '用户名'
   }
 ]
-const data = [
-  {
-    key: 0,
-    目标内容: '完成Target项目搭建',
-    计划完成时间: '2021-11-24 17:31:57',
-    完成时间: '2021-11-24 17:31:57',
-    用户名: '刘晨',
-  },
-  {
-    key: 1,
-    目标内容: '完成Target项目第一次功能迭代',
-    计划完成时间: '2021-12-24 17:31:57',
-    完成时间: '',
-    用户名: '刘晨',
-  },
-]
 </script>
+
+<template>
+  <n-data-table
+    :row-key="(item) => item.id"
+    :columns="columns"
+    :data="targetData"
+  />
+</template>
