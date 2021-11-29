@@ -1,41 +1,13 @@
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue'
-import {TargetItem} from './type'
-import axios from 'axios'
-import {TARGET_LIST} from '../../constants/api'
-const targetData = ref<TargetItem[]>([])
-const fetchTargetList = async () => {
-  const result = await axios.get(TARGET_LIST)
-  targetData.value = result.data
-}
-onMounted(() => {
-  fetchTargetList()
-})
-import { NDataTable } from 'naive-ui'
-const columns= [
-  {
-    title: '目标内容',
-    key: '目标内容',
-  },
-  {
-    title: '计划完成时间',
-    key: '计划完成时间'
-  },
-  {
-    title: '完成时间',
-    key: '完成时间'
-  },
-  {
-    title: '用户名',
-    key: '用户名'
-  }
-]
+import PageHeader from './components/PageHeader/Index.vue'
+import GlobalMessageContent from './components/GlobalMessageContent.vue'
+import {NMessageProvider} from 'naive-ui'
 </script>
 
 <template>
-  <n-data-table
-    :row-key="(item) => item.id"
-    :columns="columns"
-    :data="targetData"
-  />
+  <PageHeader />
+  <router-view />
+  <n-message-provider>
+    <GlobalMessageContent />
+  </n-message-provider>
 </template>

@@ -13,7 +13,8 @@
     "eslint-plugin-vue": "^8.1.1",
     "naive-ui": "^2.21.1",
     "vue": "^3.2.16",
-    "vue-eslint-parser": "^8.0.1"
+    "vue-eslint-parser": "^8.0.1",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
